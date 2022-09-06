@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function saludo(n){
+            document.getElementById("mensaje").innerHTML=n;
+        }
+
+
+        async function traerpais(){
+            const respuesta = await fetch("https://api.nationalize.io/?name=Vladimir");
+
+            if(!respuesta.ok){
+                let error = "404 URL No Encontrada";
+                alert(error);
+            }
+
+            const nombre = respuesta.json();
+            
+            return nombre;
+        }
+
+        function mostrarnombre(n){
+            document.getElementById("mensaje").innerHTML = n.country[0].country_id;
+        }
+    </script>
+</head>
+<body>
+    <h1>Ejemplo 1</h1>
+    <script>
+        function sumar(a,b){
+            a = a + b;
+            console.log(a);
+        }
+        sumar(10,80);
+    </script>
+    <p id="mensaje">Cargando...</p>
+    <script>
+        traerpais().then(mostrarnombre);
+    </script>
+
+</body>
+</html>
